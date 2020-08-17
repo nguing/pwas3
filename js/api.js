@@ -38,12 +38,14 @@ function getData1() {
           let group_team = "";
           data.standings.forEach(function(d2) {
             d2.table.forEach(function(d1) {
+              let gambar = d1.team.crestUrl;
+              gambar = gambar.replace(/^http:\/\//i, 'https://');
               group_team += `
                     <div class="card">
                       <a href="./football.html?id=${d1.team.id}">
                         <div class="card-content">
                           <span class="card-title truncate">
-                            <img class="materialboxed" width="30" src="${d1.team.crestUrl}">
+                            <img class="materialboxed" width="30" src="${gambar}">
                             ${d1.team.name}
                           </span>
                         </div>
@@ -80,12 +82,14 @@ function getData1() {
       let group_team = "";
       data.standings.forEach(function(d2) {
         d2.table.forEach(function(d1) {
+          let gambar = d1.team.crestUrl;
+          gambar = gambar.replace(/^http:\/\//i, 'https://');          
           group_team += `
                 <div class="card">
                   <a href="./football.html?id=${d1.team.id}">
                     <div class="card-content">
                       <span class="card-title truncate">
-                        <img class="materialboxed" height="30" src="${d1.team.crestUrl}">
+                        <img class="materialboxed" height="30" src="${gambar}">
                         ${d1.team.name}
                       </span>
                     </div>                  
@@ -173,10 +177,12 @@ function getDataById() {
       caches.match(base_url + "v2/teams/" + idParam).then(function(response) {
         if (response) {
           response.json().then(function(data) {
+            let gambar = data.crestUrl;
+            gambar = gambar.replace(/^http:\/\//i, 'https://');                 
             football1HTML = `
               <div class="card">
                 <div class="card-content">
-                  <span class="card-title"><img class="materialboxed" width="50" src="${data.crestUrl}"> Club Name : ${data.name}</span>
+                  <span class="card-title"><img class="materialboxed" width="50" src="${gambar}"> Club Name : ${data.name}</span>
                   <span class="card-title">Area : ${data.area.name}</span>
                   <span class="card-title">Aktif Competition : ${data.activeCompetitions[0].name}</span>                  
                 </div>
@@ -201,10 +207,12 @@ function getDataById() {
         // Objek JavaScript dari response.json() masuk lewat variabel data.
         console.log(data);
         // Menyusun komponen card data secara dinamis
+        let gambar = data.crestUrl;
+        gambar = gambar.replace(/^http:\/\//i, 'https://');
         let football1HTML = `
               <div class="card">
                 <div class="card-content">
-                  <span class="card-title"><img class="materialboxed" width="50" src="${data.crestUrl}"> Name Club : ${data.name}</span>
+                  <span class="card-title"><img class="materialboxed" width="50" src="${gambar}"> Name Club : ${data.name}</span>
                   <span class="card-title">Area : ${data.area.name}</span>
                   <span class="card-title">Aktif Competition : ${data.activeCompetitions[0].name}</span>
                 </div>
